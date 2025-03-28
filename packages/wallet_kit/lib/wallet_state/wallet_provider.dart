@@ -30,6 +30,7 @@ class Wallets extends _$Wallets with PersistedState<WalletsState> {
     required SecureStore secureStore,
     String? seedPhrase,
     String? walletId,
+    WalletType walletType = WalletType.openZeppelin,
   }) async {
     seedPhrase = seedPhrase ?? WalletService.newSeedPhrase();
     final walletWithoutAccount = await WalletService.addWallet(
@@ -37,6 +38,7 @@ class Wallets extends _$Wallets with PersistedState<WalletsState> {
       seedPhrase: seedPhrase,
       walletId: walletId,
       walletName: "Wallet ${state.wallets.length + 1}",
+      walletType: walletType,
     );
     final (walletWithAccount, account) = await WalletService.addAccount(
       secureStore: secureStore,

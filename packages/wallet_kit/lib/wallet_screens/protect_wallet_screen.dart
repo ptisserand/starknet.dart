@@ -43,6 +43,7 @@ class ProtectWalletScreen extends HookConsumerWidget {
                       await ref.read(walletsProvider.notifier).addWallet(
                             secureStore: BiometricsStore(),
                             seedPhrase: seedPhrase,
+                            walletType: walletType,
                           );
                       isLoading.value = false;
                       // ignore: use_build_context_synchronously
@@ -62,6 +63,7 @@ class ProtectWalletScreen extends HookConsumerWidget {
                     getPassword: () => showPasswordModal(context),
                   ),
                   seedPhrase: seedPhrase,
+                  walletType: walletType,
                 );
             isLoading.value = false;
             // ignore: use_build_context_synchronously

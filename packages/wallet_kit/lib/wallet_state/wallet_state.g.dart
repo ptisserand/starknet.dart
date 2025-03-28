@@ -66,6 +66,7 @@ Map<String, dynamic> _$$WalletImplToJson(_$WalletImpl instance) =>
 const _$WalletTypeEnumMap = {
   WalletType.openZeppelin: 'openZeppelin',
   WalletType.argent: 'argent',
+  WalletType.argentSession: 'argentSession',
   WalletType.braavos: 'braavos',
 };
 

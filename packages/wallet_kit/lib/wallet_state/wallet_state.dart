@@ -49,6 +49,7 @@ class Account with _$Account implements PersistableState {
 enum WalletType {
   openZeppelin,
   argent,
+  argentSession,
   braavos,
 }
 
@@ -94,5 +95,33 @@ extension WalletExtension on Wallet {
       accounts: {...accounts, account.id: account},
     );
     return (updatedWallet, account);
+  }
+}
+
+extension WalletTypeExtension on WalletType {
+  String get label {
+    switch (this) {
+      case WalletType.openZeppelin:
+        return 'OpenZeppelin';
+      case WalletType.argent:
+        return 'Argent';
+      case WalletType.argentSession:
+        return 'Argent Session';
+      case WalletType.braavos:
+        return 'Braavos';
+    }
+  }
+
+  String get description {
+    switch (this) {
+      case WalletType.openZeppelin:
+        return 'OpenZeppelin wallet';
+      case WalletType.argent:
+        return 'Basic Argent Wallet';
+      case WalletType.argentSession:
+        return 'Argent Wallet with session key';
+      case WalletType.braavos:
+        return 'Braavos Wallet';
+    }
   }
 }

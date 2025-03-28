@@ -4,24 +4,34 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../ui/index.dart';
+import '../wallet_state/wallet_state.dart';
+import '../widgets/wallet_type_selector.dart';
 import 'protect_wallet_screen.dart';
 
 const space = SizedBox(height: 16);
 
 class CreateWalletScreen extends HookConsumerWidget {
   final String seedPhrase;
-
   const CreateWalletScreen({super.key, required this.seedPhrase});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isChecked = useState(false);
+    final walletType = useState(WalletType.argentSession);
 
     return Layout2(
       verticalSpacing: 16,
       children: [
         const SimpleHeader(
           title: 'Create wallet',
+        ),
+        WalletTypeSelector(
+          initialValue: WalletType.argentSession,
+          availableTypes: const [
+            WalletType.argentSession,
+            WalletType.openZeppelin,
+          ],
+          onChanged: (value) => walletType.value = value,
         ),
         const Text(
           'Keep this phrase safe and secret. It can be used to recover your wallet.',
@@ -51,6 +61,7 @@ class CreateWalletScreen extends HookConsumerWidget {
                       MaterialPageRoute(
                         builder: (context) => ProtectWalletScreen(
                           seedPhrase: seedPhrase,
+                          walletType: walletType.value,
                         ),
                       ),
                     );
